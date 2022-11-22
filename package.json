@@ -1,0 +1,30 @@
+{
+    "name": "babel-tutorial",
+    "version": "1.0.0",
+    "main": "./dist/index.js",
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.6.1"
+    },
+    "scripts": {
+        "start": "nodemon --exec babel-node index.js",
+        "debug": "nodemon src/index.js --exec babel-node",
+        "build": "npx babel src --out-dir dist"
+    },
+    "author": "",
+    "license": "MIT",
+    "description": "",
+    "dependencies": {
+        "@google-analytics/data": "^2.8.0",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "ejs": "^3.0.1",
+        "express": "^4.17.1",
+        "googleapis": "^100.0.0",
+        "lodash": "^4.17.11",
+        "moment": "^2.24.0",
+        "mysql2": "^2.3.3",
+        "node-schedule": "^1.3.2",
+        "xlsx-workbook": "^1.0.3"
+    }
+}
