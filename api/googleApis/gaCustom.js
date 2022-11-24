@@ -37,8 +37,8 @@ async function ga4Custom(propertyId, startDate, endDate, metrics, dimensions) {
     return [ga4DimenstionArray, ga4MetricsArray]
 }
 
-// Ga4 Muitiple Metrics
-async function ga4Body() {
+// Ga4 Muitiple Metrics Filter Sample
+export async function ga4Body(propertyId, startDate, endDate) {
     const [response] = await analyticsDataClient.runReport({
         property: `properties/${propertyId}`,
         dateRanges: [{
@@ -101,38 +101,39 @@ async function ga4Body() {
                 ],
             },
         },
-        dimensionFilter: {
-            filter: {
-                fieldName: 'eventName',
-                stringFilter: {
-                    value: 'first_open',
-                },
-            },
-        },
-        dimensionFilter: {
-            notExpression: {
-                filter: {
-                    fieldName: 'pageTitle',
-                    stringFilter: {
-                        value: 'My Homepage',
-                    },
-                },
-            },
-        },
-        // list filter
-        dimensionFilter: {
-            filter: {
-                fieldName: 'eventName',
-                inListFilter: {
-                    values: [
-                        'purchase',
-                        'in_app_purchase',
-                        'app_store_subscription_renew',
-                    ],
-                },
-            },
-        },
+        // dimensionFilter: {
+        //     filter: {
+        //         fieldName: 'eventName',
+        //         stringFilter: {
+        //             value: 'first_open',
+        //         },
+        //     },
+        // },
+        // dimensionFilter: {
+        //     notExpression: {
+        //         filter: {
+        //             fieldName: 'pageTitle',
+        //             stringFilter: {
+        //                 value: 'My Homepage',
+        //             },
+        //         },
+        //     },
+        // },
+        // // list filter
+        // dimensionFilter: {
+        //     filter: {
+        //         fieldName: 'eventName',
+        //         inListFilter: {
+        //             values: [
+        //                 'purchase',
+        //                 'in_app_purchase',
+        //                 'app_store_subscription_renew',
+        //             ],
+        //         },
+        //     },
+        // },
     });
+    console.log(response);
 }
 
 // GA3 Realtime , allParams, mainParam

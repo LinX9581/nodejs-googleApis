@@ -1,6 +1,5 @@
 import fs from 'fs'
 import { google } from 'googleapis'
-import bodyParser from 'body-parser'
 import express from 'express'
 
 const router = express.Router();

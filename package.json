@@ -4,7 +4,8 @@
     "main": "./dist/index.js",
     "devDependencies": {
         "babel-cli": "^6.26.0",
-        "babel-preset-env": "^1.6.1"
+        "babel-preset-env": "^1.6.1",
+        "eslint": "^8.28.0"
     },
     "scripts": {
         "start": "nodemon --exec babel-node index.js",

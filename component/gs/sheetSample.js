@@ -1,7 +1,7 @@
 import * as googleApis from '../../api/googleApis/gsCustom'
 
 // sheetSample()
-async function sheetSample() {
+export async function sheetSample() {
     await googleApis.updateGsSheet(config.sheetId.test, 'test1' + '!A1', [
         ['1asdasd']
     ])
