@@ -2,6 +2,7 @@ import * as googleApis from '../api/googleApis/gaCustom'
 import schedule from 'node-schedule';
 import moment from 'moment';
 import '../component/gs/sheetSample'
+import '../component/youtube/youtubeSample'
 
 // test()
 async function test() {

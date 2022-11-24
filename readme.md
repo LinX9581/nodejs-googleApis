@@ -1,15 +1,15 @@
 # Nodejs Google Api Template
 
 ## Note
-Google Analytics 3 4
-Google Sheet
-Google Youtube
+* Google Analytics 3 4
+* Google Sheet
+* Google Youtube
 
 ## Quick Start
 git clone 
 yarn install
 
-* need config.js & mysql-connect.js
+* need config.js
 config.js format
 ```
 export default {
@@ -27,20 +27,21 @@ export default {
     },
     sheetId: {
         test: 'sheetId',
+    },
+    auth: {
+      key: 'auth'
     }
 };
+```
 yarn start
 
-```
-
 * tree
-api         ./api
-allSchedule ./routes/allSchedule.js
-sample      ./component
-
+./api                     // ga3 ga4 sheet youtube search-console
+./routes/allSchedule.js   // daily update data to db or sheet
+./component               // api sample
+./route                   // ga oauth youtube
 
 # GA4 Note
-
 * Metrics & Dimensions
 https://developers.google.com/analytics/devguides/reporting/core/v4/advanced
 
@@ -186,3 +187,38 @@ https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/tr
 * Other
 https://www.youtube.com/watch?v=MiPpQzW_ya0
 https://blog.mintsu-dev.com/posts/2019-07-16-nuxtjs-google-analytics-api/
+
+## Oauth Note
+1. Get Credentials
+- GCP -> APIs & Services -> Credentails -> CREATE CREDENCIALS -> Create OAuth client ID -> Web application
+- Input name , root doamin , root domain/oauth
+
+2. Get clientId clientSecret redirectUrl
+- ./route/oauthRoute
+
+3. Scopes choose what you want
+sample is youtube & search console
+
+4. Store oauth token & get credentails
+```
+const token = fs.readFileSync('/root/.oauth/oauth.json', 'utf8')
+oauth2Client.credentials = JSON.parse(token);
+google.options({ auth: oauth2Client });
+const youtube = google.youtube({
+    version: 'v3',
+    auth: oauth2Client
+});
+```
+## Youtube Note
+
+* Quota
+- read list 1 unit
+- Create Update Delete 50 unit
+- search 100
+- Insert 1600 unit
+- total unit = 10000
+
+* ref
+- [youtube api document](https://developers.google.com/youtube/v3/docs)
+- [other](https://www.pexels.com/zh-tw/search/videos/%E8%BE%A6%E5%85%AC%E5%AE%A4/)
+- [nodejs oauth api ref](https://hackmd.io/@c36ICNyhQE6-iTXKxoIocg/S1eYdtA1P)

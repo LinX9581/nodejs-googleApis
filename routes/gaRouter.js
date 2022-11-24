@@ -37,4 +37,4 @@ router.get('/ga3/:id/:startDate/:endDate/:dimensions/:metrics', async function(r
     }));
 });
 
-module.exports = router;
+export default router;
