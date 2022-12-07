@@ -9,131 +9,52 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
     },
 });
 
-async function ga4Custom(propertyId, startDate, endDate, metrics, dimensions) {
-    // Enabled Google Analytics Data API
-    const [response] = await analyticsDataClient.runReport({
+export async function ga4Custom(propertyId, startDate, endDate, metrics, dimensions, filter, order, results) {
+    try {
+      if (filter === '') filter = undefined
+      if (dimensions === '') dimensions = undefined
+      if (order === '') order = undefined
+  
+      let params = {
         property: `properties/${propertyId}`,
         dateRanges: [{
-            startDate: startDate,
-            endDate: endDate,
-        }, ],
-        metrics: [{
-            name: metrics
+          startDate: startDate,
+          endDate: endDate
         }],
-        dimensions: [{
-            name: dimensions,
-        }, ],
-    });
-
-    let ga4DimenstionArray = []
-    let ga4MetricsArray = []
-
-    response.rows.forEach((row, index) => {
-        if (index < 15) {
-            ga4DimenstionArray.push(row.dimensionValues[0].value)
-            ga4MetricsArray.push(row.metricValues[0].value)
-        }
-    });
-    return [ga4DimenstionArray, ga4MetricsArray]
-}
-
-// Ga4 Muitiple Metrics Filter Sample
-export async function ga4Body(propertyId, startDate, endDate) {
-    const [response] = await analyticsDataClient.runReport({
-        property: `properties/${propertyId}`,
-        dateRanges: [{
-            startDate: startDate,
-            endDate: endDate,
-        }, ],
-        metrics: [{
-                name: 'sessions',
-            },
-            {
-                name: 'screenPageViews'
-            }
-        ],
-        dimensions: [{
-                name: 'country',
-            },
-            {
-                name: 'region',
-            },
-            {
-                name: 'city',
-            },
-        ],
-        orderBys: [{
-            metric: {
-                metricName: "sessions"
-            },
-            desc: true
-        }],
-        metricFilter: {
-            filter: {
-                fieldName: 'sessions',
-                numericFilter: {
-                    operation: 'GREATER_THAN',
-                    value: {
-                        int64Value: 1000,
-                    },
-                },
-            },
-        },
-        // muiltiple filter
-        dimensionFilter: {
-            andGroup: {
-                expressions: [{
-                        filter: {
-                            fieldName: 'browser',
-                            stringFilter: {
-                                value: 'Chrome',
-                            },
-                        },
-                    },
-                    {
-                        filter: {
-                            fieldName: 'countryId',
-                            stringFilter: {
-                                value: 'US',
-                            },
-                        },
-                    },
-                ],
-            },
-        },
-        // dimensionFilter: {
-        //     filter: {
-        //         fieldName: 'eventName',
-        //         stringFilter: {
-        //             value: 'first_open',
-        //         },
-        //     },
-        // },
-        // dimensionFilter: {
-        //     notExpression: {
-        //         filter: {
-        //             fieldName: 'pageTitle',
-        //             stringFilter: {
-        //                 value: 'My Homepage',
-        //             },
-        //         },
-        //     },
-        // },
-        // // list filter
-        // dimensionFilter: {
-        //     filter: {
-        //         fieldName: 'eventName',
-        //         inListFilter: {
-        //             values: [
-        //                 'purchase',
-        //                 'in_app_purchase',
-        //                 'app_store_subscription_renew',
-        //             ],
-        //         },
-        //     },
-        // },
-    });
-    console.log(response);
+        metrics: metrics,
+        dimensions: dimensions,
+        limit: results,
+      }
+  
+      params['dimensionFilter'] = filter?.dimensionFilter
+      params['metricFilter'] = filter?.metricFilter
+      params['orderBys'] = order
+      
+      const [response] = await analyticsDataClient.runReport(params)
+      
+      let ga4DimenstionArray = []
+      let ga4MetricsArray = []
+      let ga4Data = []
+  
+      for (let i = 0; i < metrics.length; i++) {
+        ga4MetricsArray = []
+        response.rows.forEach((row) => {
+          ga4MetricsArray.push(row.metricValues[i].value)
+        })
+        ga4Data[metrics[i].name] = ga4MetricsArray
+      }
+  
+      for (let i = 0; i < dimensions.length; i++) {
+        ga4DimenstionArray = []
+        response.rows.forEach((row) => {
+          ga4DimenstionArray.push(row.dimensionValues[i].value)
+        })
+        ga4Data[dimensions[i].name] = ga4DimenstionArray
+      }
+      return ga4Data
+    } catch (error) {
+      return 'error: ' + error
+    }
 }
 
 // GA3 Realtime , allParams, mainParam
@@ -183,4 +104,4 @@ async function gaCustom(ids, startDate, endDate, dimension, date) {
     return await getGaData(params);
 }
 
-export { gaRtCustom, gaAllCustom, gaCustom, ga4Custom }
+export { gaRtCustom, gaAllCustom, gaCustom }

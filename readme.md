@@ -44,6 +44,7 @@ yarn start
 # GA4 Note
 * Metrics & Dimensions
 https://developers.google.com/analytics/devguides/reporting/core/v4/advanced
+https://support.google.com/analytics/answer/11242841?hl=en#zippy=%2Cin-this-article
 
 * Dimensions
 pageTitle
@@ -51,7 +52,11 @@ fullPageUrl
 defaultChannelGrouping // source但撈出來空的
 deviceCategory
 firstUserDefaultChannelGrouping   //大項目
-firstUserSourceMedium             //細項
+firstUserSourceMedium             
+firstUserMedium
+firstUserSource
+firstUserCampaignName
+unifiedScreenName     //即時網頁標題
 
 * Metrics
 screenPageViews
@@ -75,102 +80,41 @@ https://dns.sample.com/ga4/308596645/2022-10-25/2022-10-30/date/screenPageViews
 [Official Document]
 (https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/batchRunReports)
 
-* result
-{
-  "metricHeaders": [
-    {
-      "name": "sessions",
-      "type": "TYPE_INTEGER"
-    }
-  ],
-  "rows": [
-    {
-      "dimensionValues": [
-        {
-          "value": "20210104"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "12900"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "20210105"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "10700"
-        }
-      ]
-    },
-    {
-      "dimensionValues": [
-        {
-          "value": "20210106"
-        }
-      ],
-      "metricValues": [
-        {
-          "value": "11300"
-        }
-      ]
-    }
-  ],
-  "metadata": {},
-  "dimensionHeaders": [
-    {
-      "name": "date"
-    }
-  ],
-  "rowCount": 3
-}
-
 ```
-{
-  "property": string,
-  "dimensions": [
-    {
-      object (Dimension)
-    }
-  ],
-  "metrics": [
-    {
-      object (Metric)
-    }
-  ],
-  "dateRanges": [
-    {
-      object (DateRange)
-    }
-  ],
-  "dimensionFilter": {
-    object (FilterExpression)
+property: `properties/${propertyId}`,
+dimensions: [
+  {
+    name: 'date',
   },
-  "metricFilter": {
-    object (FilterExpression)
+],
+metrics: [
+  {
+    name: 'activeUsers',
   },
-  "offset": string,
-  "limit": string,
-  "metricAggregations": [
-    enum (MetricAggregation)
-  ],
-  "orderBys": [
-    {
-      object (OrderBy)
-    }
-  ],
-  "currencyCode": string,
-  "cohortSpec": {
-    object (CohortSpec)
+  {
+    name: 'newUsers',
   },
-  "keepEmptyRows": boolean,
-  "returnPropertyQuota": boolean
-}
+],
+dateRanges: [
+  {
+    startDate: '7daysAgo',
+    endDate: 'today',
+  },
+],
+dimensionFilter: {
+  filter: {
+    fieldName: "firstUserSource",
+    stringFilter: { matchType: "CONTAINS", value: 'google', caseSensitive: false }
+  }
+},
+orderBys: [
+  {
+    metric: {
+      metricName: 'totalRevenue',
+    },
+    desc: true,
+  },
+],
 ```
 
 ## GA3 Note
