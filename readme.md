@@ -166,3 +166,8 @@ const youtube = google.youtube({
 - [youtube api document](https://developers.google.com/youtube/v3/docs)
 - [other](https://www.pexels.com/zh-tw/search/videos/%E8%BE%A6%E5%85%AC%E5%AE%A4/)
 - [nodejs oauth api ref](https://hackmd.io/@c36ICNyhQE6-iTXKxoIocg/S1eYdtA1P)
+
+
+## BiqQuery Note
+* Samples
+https://github.com/googleapis/nodejs-bigquery/tree/main/samples

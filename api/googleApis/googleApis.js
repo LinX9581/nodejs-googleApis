@@ -1,14 +1,14 @@
 import { google } from 'googleapis'
 
-let { clientEmail, privateKey } = config.google;
+let { client_email, private_key } = config.google;
 
 // GA3
 const scopes = [
     'https://www.googleapis.com/auth/analytics.readonly',
-    'https://www.googleapis.com/auth/spreadsheets'
+    'https://www.googleapis.com/auth/spreadsheets',
 ];
 
-const jwt = new google.auth.JWT(clientEmail, null, privateKey, scopes)
+const jwt = new google.auth.JWT(client_email, null, private_key, scopes)
 jwt.authorize(function(err) {
     if (err) {
         console.log("Google Api Err" + err);

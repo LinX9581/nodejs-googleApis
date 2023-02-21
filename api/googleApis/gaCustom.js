@@ -1,11 +1,12 @@
 import { getGaRtData, getGaData } from './googleApis'
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
+let { client_email, private_key } = config.google;
 // GA4
 const analyticsDataClient = new BetaAnalyticsDataClient({
     credentials: {
-        client_email: config.google.clientEmail,
-        private_key: config.google.privateKey,
+        client_email: client_email,
+        private_key: private_key,
     },
 });
 

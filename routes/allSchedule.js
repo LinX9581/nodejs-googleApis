@@ -1,4 +1,5 @@
 import * as googleApis from '../api/googleApis/gaCustom'
+import '../component/bigquery/bigquery'
 import '../component/gs/sheetSample'
 import '../component/youtube/youtubeSample'
 

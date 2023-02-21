@@ -23,11 +23,11 @@ async function deleteGsSheet(sheetId) {
             }]
         }
     };
-    gsapi.spreadsheets.batchUpdate(createOpt, (err, response) => {
+    gsapi.spreadsheets.batchUpdate(createOpt, (err) => {
         console.log("sheet was delete")
         if (err) {
             console.log(err)
-        } else {}
+        }
     });
 }
 
@@ -46,10 +46,10 @@ async function createGsSheet(sheetId, workName) {
             }]
         }
     };
-    gsapi.spreadsheets.batchUpdate(createOpt, (err, response) => {
+    gsapi.spreadsheets.batchUpdate(createOpt, (err) => {
         if (err) {
             console.log(err)
-        } else {}
+        }
     });
 }
 

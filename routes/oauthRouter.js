@@ -8,7 +8,8 @@ const oauth2Client = new OAuth2(config.googleOauth.clientId, config.googleOauth.
 const scopes = [
     'https://www.googleapis.com/auth/youtube',
     'https://www.googleapis.com/auth/webmasters',
-    'https://www.googleapis.com/auth/webmasters.readonly'
+    'https://www.googleapis.com/auth/webmasters.readonly',
+    'https://www.googleapis.com/auth/bigquery'
 ];
 
 router.get('/', function(req, res) {
