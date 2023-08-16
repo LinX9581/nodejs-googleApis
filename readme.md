@@ -7,10 +7,11 @@
 * BigQuery
 
 ## Quick Start
-git clone 
-yarn install
+git clone https://github.com/LinX9581/nodejs-googleApis  
+cd nodejs-googleApis  
+yarn install  
 
-* need env
+* add env file
 env format
 ```
 # service account
@@ -23,7 +24,7 @@ GOOGLE_CLIENT_SECRET=""
 GOOGLE_REFRESH_TOKEN=""
 
 # ga4 id 
-GA4_VIEW_ID="274947839"
+GA4_VIEW_ID=""
 
 # sheet id
 SHEET_ID_TEST=""
@@ -33,9 +34,9 @@ db_host=
 db_user=
 db_password=
 ```
-yarn start
+yarn start  
 
-add GOOGLE_CLIENT_EMAIL to ga,sheet viewer permissions
+add GOOGLE_CLIENT_EMAIL to ga and sheet viewer permissions  
 
 * tree
 ./api                     // ga3 ga4 sheet youtube search-console
