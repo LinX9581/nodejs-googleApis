@@ -1,6 +1,7 @@
 import * as googleApis from '../../api/googleApis/gaCustom'
+import moment from 'moment'
 
-let allIds = config.gaViewId.ga4AllIds
+let allIds = config.ga4ViewId.ga4AllIds
 
 // getGa4Data()
 export async function getGa4Data() {

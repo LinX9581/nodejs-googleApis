@@ -1,8 +1,8 @@
-import { getGaRtData, getGaData } from './googleApis'
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
 let { client_email, private_key } = config.google;
-// GA4
+
+// GA4 API 還在 Beta 不是用 JWT
 const analyticsDataClient = new BetaAnalyticsDataClient({
     credentials: {
         client_email: client_email,
@@ -57,52 +57,3 @@ export async function ga4Custom(propertyId, startDate, endDate, metrics, dimensi
       return 'error: ' + error
     }
 }
-
-// GA3 Realtime , allParams, mainParam
-
-async function gaRtCustom(ids, metrics, dimensions) {
-
-    let params = {
-        'ids': 'ga:' + ids,
-        'metrics': 'rt:' + metrics,
-        'dimensions': 'rt:' + dimensions,
-        'sort': '-rt:' + metrics,
-        'max-results': 15,
-    };
-
-    return await getGaRtData(params);
-}
-
-async function gaAllCustom(ids, startDate, endDate, metrics, dimensions, sort, filters, startIndex) {
-
-    if (filters == '') filters = undefined
-
-    let params = {
-        'ids': 'ga:' + ids,
-        'start-date': startDate,
-        'end-date': endDate,
-        'metrics': metrics,
-        'dimensions': dimensions,
-        'sort': sort,
-        'filters': filters,
-        'start-index': startIndex,
-        'max-results': 10000,
-    };
-
-    return await getGaData(params);
-}
-
-async function gaCustom(ids, startDate, endDate, dimension, date) {
-
-    let params = {
-        'ids': 'ga:' + ids,
-        'start-date': startDate,
-        'end-date': endDate,
-        'metrics': dimension,
-        'dimensions': date
-    };
-
-    return await getGaData(params);
-}
-
-export { gaRtCustom, gaAllCustom, gaCustom }

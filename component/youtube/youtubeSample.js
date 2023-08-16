@@ -1,6 +1,7 @@
 import { google } from 'googleapis'
 import fs from 'fs'
 
+// oauth 建立完會有一組 client id 跟 client secret
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2(config.googleOauth.clientId, config.googleOauth.clientSecret, config.googleOauth.redirectUrl);
 

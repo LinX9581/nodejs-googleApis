@@ -28,11 +28,5 @@ router.get('/ga4/:id/:startDate/:endDate/:dimensions/:metrics', async function(r
         "ga4Data": ga4Data
     }));
 });
-router.get('/ga3/:id/:startDate/:endDate/:dimensions/:metrics', async function(req, res) {
-    let ga3Data = await ga3Custom(req.params.id, req.params.startDate, req.params.endDate, req.params.dimensions, req.params.metrics);
-    res.send(JSON.stringify({
-        "ga3Data": ga3Data
-    }));
-});
 
 export default router;

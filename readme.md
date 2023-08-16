@@ -1,39 +1,41 @@
 # Nodejs Google Api Template
 
 ## Note
-* Google Analytics 3 4
+* Google Analytics 4
 * Google Sheet
 * Google Youtube
+* BigQuery
 
 ## Quick Start
 git clone 
 yarn install
 
-* need config.js
-config.js format
+* need env
+env format
 ```
-export default {
-    google: {
-      {service account json}
-    },
-    gaViewId: {
-      ga4AllIds: '',
-      ga3AllIds: '',
-    },
-    mysql: {
-        host: '127.0.0.1',
-        user: '',
-        password: ''
-    },
-    sheetId: {
-        test: 'sheetId',
-    },
-    auth: {
-      key: 'auth'
-    }
-};
+# service account
+GOOGLE_CLIENT_EMAIL=""
+GOOGLE_PRIVATE_KEY=""
+
+# oauth
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+GOOGLE_REFRESH_TOKEN=""
+
+# ga4 id 
+GA4_VIEW_ID="274947839"
+
+# sheet id
+SHEET_ID_TEST=""
+
+# db
+db_host=
+db_user=
+db_password=
 ```
 yarn start
+
+add GOOGLE_CLIENT_EMAIL to ga,sheet viewer permissions
 
 * tree
 ./api                     // ga3 ga4 sheet youtube search-console
@@ -46,17 +48,20 @@ yarn start
 https://developers.google.com/analytics/devguides/reporting/core/v4/advanced
 https://support.google.com/analytics/answer/11242841?hl=en#zippy=%2Cin-this-article
 
+* Online Query
+https://ga-dev-tools.appspot.com/query-explorer/
+https://ga-dev-tools.appspot.com/dimensions-metrics-explorer/
+
 * Dimensions
 pageTitle
 fullPageUrl
-defaultChannelGrouping // source但撈出來空的
 deviceCategory
 firstUserDefaultChannelGrouping   //大項目
 firstUserSourceMedium             
 firstUserMedium
 firstUserSource
 firstUserCampaignName
-unifiedScreenName     //即時網頁標題
+unifiedScreenName     // realtime pageTitle
 
 * Metrics
 screenPageViews
@@ -73,7 +78,6 @@ https://googleapis.dev/nodejs/analytics-data/latest/
 https://stackoverflow.com/users/14466144/brett
 
 * rest api -> ./routes/index-router.js
-https://dns.sample.com/ga3/106152872/2022-05-20/2022-05-27/date/pageViews
 https://dns.sample.com/ga4/308596645/2022-10-25/2022-10-30/date/screenPageViews
 
 * Request Body
@@ -116,21 +120,6 @@ orderBys: [
   },
 ],
 ```
-
-## GA3 Note
-* Online Query
-https://ga-dev-tools.appspot.com/query-explorer/
-https://ga-dev-tools.appspot.com/dimensions-metrics-explorer/
-
-* Metrics
-https://developers.google.com/analytics/devguides/reporting/core/v3/common-queries#top-content
-
-* Realtime Dimention
-https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/trafficsources
-
-* Other
-https://www.youtube.com/watch?v=MiPpQzW_ya0
-https://blog.mintsu-dev.com/posts/2019-07-16-nuxtjs-google-analytics-api/
 
 ## Oauth Note
 1. Get Credentials
