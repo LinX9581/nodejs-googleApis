@@ -5,15 +5,15 @@ import fs from 'fs'
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2(config.googleOauth.clientId, config.googleOauth.clientSecret, config.googleOauth.redirectUrl);
 
-// need to oauth google account
-const token = fs.readFileSync('/root/.oauth/oauth.json', 'utf8')
-oauth2Client.credentials = JSON.parse(token);
+// 執行過oauth的動作後 會存一份json file 取得後再把以下註解取消
+// const token = fs.readFileSync('/root/.oauth/oauth.json', 'utf8')
+// oauth2Client.credentials = JSON.parse(token);
 
-google.options({ auth: oauth2Client });
-const youtube = google.youtube({
-    version: 'v3',
-    auth: oauth2Client
-});
+// google.options({ auth: oauth2Client });
+// const youtube = google.youtube({
+//     version: 'v3',
+//     auth: oauth2Client
+// });
 
 export async function getVideo(videoId) {
     let response = await youtube.videos.list({
