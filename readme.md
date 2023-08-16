@@ -39,10 +39,12 @@ yarn start
 add GOOGLE_CLIENT_EMAIL to ga and sheet viewer permissions  
 
 * tree
-./api                     // ga3 ga4 sheet youtube search-console
+```
+./api                     // ga4 sheet youtube search-console  
 ./routes/allSchedule.js   // daily update data to db or sheet
 ./component               // api sample
 ./route                   // ga oauth youtube
+```
 
 # GA4 Note
 * Metrics & Dimensions
@@ -124,14 +126,14 @@ orderBys: [
 
 ## Oauth Note
 1. Get Credentials
-- GCP -> APIs & Services -> Credentails -> CREATE CREDENCIALS -> Create OAuth client ID -> Web application
-- Input name , root doamin , root domain/oauth
+GCP -> APIs & Services -> Credentails -> CREATE CREDENCIALS -> Create OAuth client ID -> Web application  
+Input name , root doamin , root domain/oauth  
 
 2. Get clientId clientSecret redirectUrl
-- ./route/oauthRoute
+./route/oauthRoute  
 
 3. Scopes choose what you want
-sample is youtube & search console
+sample is youtube & search console  
 
 4. Store oauth token & get credentails
 ```
@@ -146,18 +148,17 @@ const youtube = google.youtube({
 ## Youtube Note
 
 * Quota
-- read list 1 unit
-- Create Update Delete 50 unit
-- search 100
-- Insert 1600 unit
-- total unit = 10000
+read list 1 unit  
+Create Update Delete 50 unit  
+search 100  
+Insert 1600 unit  
+total unit = 10000  
 
 * ref
-- [youtube api document](https://developers.google.com/youtube/v3/docs)
-- [other](https://www.pexels.com/zh-tw/search/videos/%E8%BE%A6%E5%85%AC%E5%AE%A4/)
-- [nodejs oauth api ref](https://hackmd.io/@c36ICNyhQE6-iTXKxoIocg/S1eYdtA1P)
-
+[youtube api document](https://developers.google.com/youtube/v3/docs)  
+[other](https://www.pexels.com/zh-tw/search/videos/%E8%BE%A6%E5%85%AC%E5%AE%A4/)  
+[nodejs oauth api ref](https://hackmd.io/@c36ICNyhQE6-iTXKxoIocg/S1eYdtA1P)  
 
 ## BiqQuery Note
 * Samples
-https://github.com/googleapis/nodejs-bigquery/tree/main/samples
+https://github.com/googleapis/nodejs-bigquery/tree/main/samples  
