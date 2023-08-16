@@ -11,7 +11,7 @@ git clone https://github.com/LinX9581/nodejs-googleApis
 cd nodejs-googleApis  
 yarn install  
 
-* add env file
+* add env file  
 env format
 ```
 # service account
@@ -38,7 +38,7 @@ yarn start
 
 add GOOGLE_CLIENT_EMAIL to ga and sheet viewer permissions  
 
-* tree
+* tree  
 ```
 ./api                     // ga4 sheet youtube search-console  
 ./routes/allSchedule.js   // daily update data to db or sheet
@@ -47,15 +47,15 @@ add GOOGLE_CLIENT_EMAIL to ga and sheet viewer permissions
 ```
 
 # GA4 Note
-* Metrics & Dimensions
+* Metrics & Dimensions  
 https://developers.google.com/analytics/devguides/reporting/core/v4/advanced
 https://support.google.com/analytics/answer/11242841?hl=en#zippy=%2Cin-this-article
 
-* Online Query
+* Online Query  
 https://ga-dev-tools.appspot.com/query-explorer/
 https://ga-dev-tools.appspot.com/dimensions-metrics-explorer/
 
-* Dimensions
+* Dimensions  
 pageTitle
 fullPageUrl
 deviceCategory
@@ -66,24 +66,24 @@ firstUserSource
 firstUserCampaignName
 unifiedScreenName     // realtime pageTitle
 
-* Metrics
+* Metrics  
 screenPageViews
 activeUsers
 newUsers
 userEngagementDuration
 
-* Realtime data metrics
+* Realtime data metrics  
 https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-api-schema
 
-* Nodejs
+* Nodejs  
 https://7nohe-tech-blog.vercel.app/post/node-js-google-analytics-4-ga4-contentful-google-analytics-data-api
 https://googleapis.dev/nodejs/analytics-data/latest/
 https://stackoverflow.com/users/14466144/brett
 
-* rest api -> ./routes/index-router.js
+* rest api -> ./routes/index-router.js  
 https://dns.sample.com/ga4/308596645/2022-10-25/2022-10-30/date/screenPageViews
 
-* Request Body
+* Request Body  
 [Official Document]
 (https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/batchRunReports)
 
@@ -125,17 +125,17 @@ orderBys: [
 ```
 
 ## Oauth Note
-1. Get Credentials
+1. Get Credentials  
 GCP -> APIs & Services -> Credentails -> CREATE CREDENCIALS -> Create OAuth client ID -> Web application  
 Input name , root doamin , root domain/oauth  
 
-2. Get clientId clientSecret redirectUrl
+2. Get clientId clientSecret redirectUrl  
 ./route/oauthRoute  
 
-3. Scopes choose what you want
+3. Scopes choose what you want  
 sample is youtube & search console  
 
-4. Store oauth token & get credentails
+4. Store oauth token & get credentails  
 ```
 const token = fs.readFileSync('/root/.oauth/oauth.json', 'utf8')
 oauth2Client.credentials = JSON.parse(token);
@@ -147,18 +147,18 @@ const youtube = google.youtube({
 ```
 ## Youtube Note
 
-* Quota
+* Quota  
 read list 1 unit  
 Create Update Delete 50 unit  
 search 100  
 Insert 1600 unit  
 total unit = 10000  
 
-* ref
+* ref  
 [youtube api document](https://developers.google.com/youtube/v3/docs)  
 [other](https://www.pexels.com/zh-tw/search/videos/%E8%BE%A6%E5%85%AC%E5%AE%A4/)  
 [nodejs oauth api ref](https://hackmd.io/@c36ICNyhQE6-iTXKxoIocg/S1eYdtA1P)  
 
 ## BiqQuery Note
-* Samples
+* Samples  
 https://github.com/googleapis/nodejs-bigquery/tree/main/samples  
